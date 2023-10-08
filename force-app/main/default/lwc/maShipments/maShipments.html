@@ -1,0 +1,74 @@
+<template>
+    <div style="min-height: 500px">
+
+        <div class="slds-grid slds-grid_align-spread slds-m-bottom_large">
+            <div class="slds-col">
+                ...
+            </div>
+            <div class="slds-col">
+                <lightning-button
+                    variant="brand"
+                    onclick={handleUpdateShipmentsStatusQueueable}
+                    label="All Shipments: (Asynchronously)"
+                    class="slds-m-left_x-small">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="All Shipments: run Schedule"
+                    disabled=true
+                    onclick={handleUpdateShipmentsStatusSchedule}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </div>
+
+        <div style="height: 300px; position: relative">
+            <lightning-spinner
+                if:true={isLoading}
+                variant="brand"
+                size="large">
+            </lightning-spinner>
+            <lightning-datatable
+                onrowselection={handleRowSelection}
+                columns={columns}
+                key-field="id"
+                data={data}>
+            </lightning-datatable>
+        </div>
+
+        <div class="slds-grid slds-grid_align-spread slds-m-top_large">
+            <div class="slds-col">
+                <lightning-button
+                    variant="brand-outline"
+                    label="Clear Selection"
+                    onclick={handleCancelSelection}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    disabled={updateSelectedShipmentsDisabled}
+                    label={updateSelectedLabel}
+                    onclick={handleUpdateSelectedShipmentsStatus}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    disabled={updateShipmentsDisabled}
+                    label="Update All Shipments"
+                    onclick={handleUpdateShipmentsStatus}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+            <div class="slds-col">
+                <lightning-button-icon
+                    class="slds-m-left_x-small"
+                    onclick={handleRefresh}
+                    icon-name="action:refresh"
+                    variant="brand"
+                    alternative-text="Refresh"
+                    title="Refresh">
+                </lightning-button-icon>
+            </div>
+        </div>
+    </div>
+</template>
